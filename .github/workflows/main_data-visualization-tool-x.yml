@@ -32,12 +32,12 @@ jobs:
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Collect static
-        run: python manage.py collectstatic
+        run: python manage.py collectstatic --noinput 
         
       - name: Make migrations and run migrations
         run: |
-          python manage.py makemigrations --empty polls
-          python manage.py migrate polls
+          python manage.py makemigrations --empty dashboard
+          python manage.py migrate dashboard
           
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
