@@ -32,7 +32,7 @@ jobs:
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Collect static
-        run: python manage.py collectstatic
+        run: python manage.py collectstatic --no-input
 
       # We add makemigrations and migrate to run our model/database migrations
       # This is not added by default in the generated template, so we include this ourselves
