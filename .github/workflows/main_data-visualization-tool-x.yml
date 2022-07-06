@@ -31,6 +31,15 @@ jobs:
         run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      - name: Collect static
+        run: python manage.py collectstatic
+
+      # We add makemigrations and migrate to run our model/database migrations
+      # This is not added by default in the generated template, so we include this ourselves
+      - name: Make migrations and run migrations
+        run: |
+          python manage.py makemigrations --empty dashboard
+          python manage.py migrate dashboard
           
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
