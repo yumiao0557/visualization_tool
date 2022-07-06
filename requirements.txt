@@ -1,0 +1,6 @@
+pydicom
+tqdm
+django
+django-crispy-forms
+dicom-csv
+whitenoise

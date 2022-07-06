@@ -1,0 +1,69 @@
+<div class="row">
+
+    <div class="col-md-4 mt-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                Information
+            </div>
+            <div class="card-body">
+                <col behavior="" direction="">
+                    <h3 class="my-4">New Information</h3>
+                </col>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8 mt-4">
+
+        <div class="card">
+
+            <div class="card-header bg-info text-white">
+                Dashboard Statistics
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+
+                    <div class="col-md-4">
+                        <a class="text-decoration-none text-dark" href="{% url 'UCSD_data' %}">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <h4>UCSD_data <i class="fas fa-box"></i></h4>
+                                    <h3>{{ UCSD_data }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <a class="text-decoration-none text-dark" href="{% url 'UCSD_data_fake' %}">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <h4>UCSD_data_fake <i class="fas fa-shipping-fast"></i></h4>
+                                    <h3>{{ UCSD_data_fake }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <a class="text-decoration-none text-dark" href="{% url 'LSpine_data' %}">
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+                                    <h4>LSpine_data <i class="fas fa-shipping-fast"></i></h4>
+                                    <h3>{{ LSpine_data }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

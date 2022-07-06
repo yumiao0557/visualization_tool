@@ -1,0 +1,214 @@
+{% extends 'partials/base.html' %}
+{% block title %} Home Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+<div class="row">
+     <!-- {{checkbox_value}} -->
+    <!-- {{modality_datapoints}} 
+    {% for event in checkbox_value %}
+    {% if event.approved %}{{event.sort_by_name}}
+    {% endif %}<br />
+    {%endfor%} -->
+
+
+    <form action="" method=POST>
+        {% csrf_token %}
+
+
+        <table class="table table-striped table-hover table-bordered" style="width:80%">
+            <thead>
+                <tr>
+                    <th scope="col">Event Name</th>
+                    <th scope="col">Approved</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for event in checkbox_value %}
+                <tr>
+                    <td>
+                        {{ event.sort_by_name }}
+                    </td>
+
+                    <td>
+                        {% if event.approved %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked="checked"
+                                value={{event.sort_by_name}} name="boxes">
+                        </div>
+                        {% else %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value={{event.sort_by_name}} name="boxes">
+                        </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+
+            
+            <thead>
+                <tr>
+                    <th scope="col">Document Name</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+                {% for names in visible_doc %}
+                {% if names == "UCSD_data.csv" %}
+                    <tr>
+                        <td>
+                                {{ "Check out " | urlize }}
+                        <a href="{% url 'UCSD_data' %}">{{ names }}</a>
+                        </td>
+                    </tr>
+                    {%endif%}
+                    {% if names == "UCSD_data_fake.csv" %}
+                    <tr>
+                        <td>
+                                {{ "Check out " | urlize }}
+                        <a href="{% url 'UCSD_data_fake' %}">{{ names }}</a>
+                        </td>
+                    </tr>
+                    {%endif%}
+                    {% if names == "LSpine_data.csv" %}
+                    <tr>
+                        <td>
+                                {{ "Check out " | urlize }}
+                        <a href="{% url 'LSpine_data' %}">{{ names }}</a>
+                        </td>
+                    </tr>
+                    {%endif%}
+                    {%endfor%}
+            </tbody>
+
+        </table>
+
+        <input class="btn btn-success btn-block" type="submit" value="Confirm" style="width:80%">
+    </form>
+
+    
+    
+    
+    <head>
+        <script type="text/javascript">
+            // var modality_datapoints = modality_datapoints
+
+            window.onload = function () {
+
+
+
+                var chart1 = new CanvasJS.Chart("chartContainer1",
+                    {
+                        animationEnabled: true, 
+		                animationDuration: 500,
+                        subtitles: [{
+                        text: "Modality",
+                            verticalAlign: "center",
+                            fontSize: 25,
+                            dockInsidePlotArea: true,
+                            fontColor: "#174D9F",
+                            fontFamily: 'Poppins',
+                            fontWeight: 600,
+                            maxWidth: 100
+                        }],
+
+                        legend: {
+                            verticalAlign: "bottom",
+                            horizontalAlign: "center"
+                        },
+                        data: [
+                            {
+                                startAngle: 45,
+                                indexLabelFontSize:12,
+                                indexLabelFontFamily: "Garamond",
+                                indexLabelFontColor: "black",
+                                indexLabelLineColor: "black",
+                                indexLabelPlacement: "outside",
+                                
+                                type: "doughnut",
+                                showInLegend: true,
+                                dataPoints: [
+                                    {% for key, value in modality_datapoints.items %}
+
+                                    {y:{{value}}, label:'{{key}}', legendText:'{{key}}:{{value}}',indexLabel:'{{key}}:{{value}}'},
+
+                                    {% endfor %}
+                            ]
+                            }
+                        ]
+                    });
+                
+
+                var chart2 = new CanvasJS.Chart("chartContainer2",
+                    {
+                        animationEnabled: true, 
+		                animationDuration: 500,
+                        subtitles: [{
+                        text: "Gender",
+                            verticalAlign: "center",
+                            fontSize: 25,
+                            dockInsidePlotArea: true,
+                            fontColor: "#174D9F",
+                            fontFamily: 'Poppins',
+                            fontWeight: 600,
+                            maxWidth: 100
+                        }],
+
+                        legend: {
+                            verticalAlign: "bottom",
+                            horizontalAlign: "center"
+                        },
+                        data: [
+                            {
+                                startAngle: 45,
+                                indexLabelFontSize: 20,
+                                indexLabelFontFamily: "Garamond",
+                                indexLabelFontColor: "black",
+                                indexLabelLineColor: "black",
+                                indexLabelPlacement: "outside",
+                                type: "doughnut",
+                                showInLegend: true,
+                                dataPoints: [
+                                    {% for key, value in sex_datapoints.items %}
+
+                                    {y:{{value}}, label:'{{key}}', legendText:'{{key}}:{{value}}',indexLabel:'{{key}}:{{value}}'},
+
+                                    {% endfor %}
+                            ]
+                            }
+                        ]
+                    });
+
+                chart1.render(); 
+                chart2.render();
+            }
+        </script>
+        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </head>
+
+    <body>
+        <div id="chartContainer1" style="height: 250px; width: 30%;display: inline-block;"></div>
+        <div id="chartContainer2" style="height: 250px; width: 30%;display: inline-block;"></div>
+        
+    </body>
+    
+
+
+    <!-- {% for names in visible_doc %}
+    {{names}}<br />
+    {% endfor %} -->
+
+    
+
+
+
+</div>
+
+
+
+{% endblock %}

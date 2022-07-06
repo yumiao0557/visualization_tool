@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/4132a0f7-5bed-4f6e-9bed-430f48359a02/microsoft.web/sites/subscriptions/4132a0f7-5bed-4f6e-9bed-430f48359a02/resourceGroups/web-app-data-visualization/providers/Microsoft.Web/sites/web-app-data-visualization-DVT",
+    "appService.deploySubpath": "."
+}
