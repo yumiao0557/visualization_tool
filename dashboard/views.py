@@ -6,6 +6,7 @@ from .models import CheckboxData, CountryData, Summarized_Dataset
 from .forms import CountryDataForm, Summarized_DatasetForm
 from django.http import HttpResponse
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 import pandas as pd
 from datavisual.convert_csv import csv_file, get_difference, get_csv_files
 from datavisual.convert_csv import sex_ratio
@@ -557,7 +558,7 @@ def order(request):
 def staff(request):
     return render(request, 'dashboard/staff.html')
 
-
+@csrf_exempt
 def index(request):
     # BIG TODO: CHANGE COUNTRY DATA INTO SUMMARIZED INFORMATION OF
     # EACH DATASET
